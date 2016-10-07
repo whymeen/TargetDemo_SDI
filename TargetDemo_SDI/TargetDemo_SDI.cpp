@@ -8,8 +8,7 @@
 #include "TargetDemo_SDI.h"
 #include "MainFrm.h"
 
-#include "TargetDemo_SDIDoc.h"
-#include "TargetDemo_SDIView.h"
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -96,17 +95,12 @@ BOOL CTargetDemo_SDIApp::InitInstance()
 	LoadStdProfileSettings(4);  // MRU를 포함하여 표준 INI 파일 옵션을 로드합니다.
 
 
-	// 응용 프로그램의 문서 템플릿을 등록합니다.  문서 템플릿은
-	//  문서, 프레임 창 및 뷰 사이의 연결 역할을 합니다.
-	CSingleDocTemplate* pDocTemplate;
-	pDocTemplate = new CSingleDocTemplate(
-		IDR_MAINFRAME,
-		RUNTIME_CLASS(CTargetDemo_SDIDoc),
-		RUNTIME_CLASS(CMainFrame),       // 주 SDI 프레임 창입니다.
-		RUNTIME_CLASS(CTargetDemo_SDIView));
-	if (!pDocTemplate)
-		return FALSE;
-	AddDocTemplate(pDocTemplate);
+
+
+	CMainFrame* pMainFrame = new CMainFrame();
+	m_pMainWnd = pMainFrame;
+	pMainFrame->LoadFrame(IDR_MAINFRAME);
+
 
 
 	// 표준 셸 명령, DDE, 파일 열기에 대한 명령줄을 구문 분석합니다.

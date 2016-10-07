@@ -7,6 +7,7 @@
 
 #include "MainFrm.h"
 
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -61,6 +62,19 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	m_wndToolBar.EnableDocking(CBRS_ALIGN_ANY);
 	EnableDocking(CBRS_ALIGN_ANY);
 	DockControlBar(&m_wndToolBar);
+
+
+	CCreateContext ccx;
+	ccx.m_pNewViewClass = RUNTIME_CLASS(CMainView);
+	
+	m_pMainView = DYNAMIC_DOWNCAST(CMainView, CreateView(&ccx));
+	
+	m_pMainView->ShowWindow(SW_SHOW);
+	m_pMainView->OnInitialUpdate();
+	
+	SetActiveView(m_pMainView);
+	
+	m_pMainView->ResizeParentToFit(FALSE);
 
 
 	return 0;
